@@ -1,22 +1,46 @@
 package br.edu.ufsj.modulo5.controller;
 
+import br.edu.ufsj.modulo5.model.Documento;
+import br.edu.ufsj.modulo5.repository.DocumentoRepository;
+import ch.qos.logback.core.net.SyslogOutputStream;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-// * CRUD
-// * C - Create (criar novos dados)
-// * R - Read (ler os dados da base)
-// * U - Update (atualiza os dados da base)
-// * D - Delete (deleta os dados da base)
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 
 @Controller
 @RequestMapping("/documentos")
 public class DocumentoController {
 
+    private final DocumentoRepository repository;
+
+    public DocumentoController(DocumentoRepository repository) {
+        this.repository = repository;
+    }
+
     @GetMapping
-    public String index() {
+    public String index(Model model) {
+        model.addAttribute("documentos", repository.findAll());
 
         return "documentos/index";
     }
+
+    @GetMapping("/novo")
+    public String create() {
+
+        return "documentos/create";
+    }
+
+    @PostMapping("/novo")
+    public String store() {
+
+        return "";
+    }
+
+
 }
