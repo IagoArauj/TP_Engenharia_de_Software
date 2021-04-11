@@ -6,6 +6,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @Controller
 @RequestMapping("/disciplinas")
 public class DisciplinaController {
@@ -31,16 +33,48 @@ public class DisciplinaController {
     }
 
     @PostMapping("/novo")
-    public String save(Model model, @ModelAttribute Disciplina disciplina) {
+    public String store(Model model, @ModelAttribute Disciplina disciplina) {
         repository.save(disciplina);
 
         return "redirect:/disciplinas";
     }
 
+    @GetMapping("/editar/{id}")
+    public String edit(Model model, @PathVariable String id) {
+        Optional<Disciplina> disciplina = repository.findById(Integer.parseInt(id));
+        if(disciplina.isEmpty()) return "redirect:/disciplinas?erro=Disciplina+não+encontrada";
+
+        model.addAttribute("disciplina", disciplina.get());
+
+        return "disciplinas/edit";
+    }
+
+    @PostMapping("/editar/{id}")
+    public String update(@PathVariable String id, Model model, @ModelAttribute Disciplina dis) {
+        Optional<Disciplina> disciplina = repository.findById(Integer.parseInt(id));
+        if(disciplina.isEmpty()) return "redirect:/disciplinas?erro=Disciplina+não+encontrada";
+
+        repository.save(dis);
+
+        model.addAttribute("disciplina", dis);
+        model.addAttribute("updated", true);
+        return "disciplinas/edit";
+    }
+
     @PostMapping("/confirmar/{disciplinaId}")
-    public String update(@PathVariable String disciplinaId) {
-        Disciplina disciplina = repository.getOne(Integer.parseInt(disciplinaId));
-        disciplina.setConfirmada(true);
+    public String confirm(@PathVariable String disciplinaId) {
+        Optional<Disciplina> disciplina = repository.findById(Integer.parseInt(disciplinaId));
+        if(disciplina.isEmpty()) return "redirect:/disciplinas?erro=Disciplina+não+encontrada";
+
+        disciplina.get().setConfirmada(true);
+        repository.save(disciplina.get());
+
+        return "redirect:/disciplinas";
+    }
+
+    @PostMapping("/excluir/{id}")
+    public String destroy(@PathVariable String id) {
+        repository.deleteById(Integer.parseInt((id)));
 
         return "redirect:/disciplinas";
     }

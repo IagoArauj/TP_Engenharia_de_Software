@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/documentos")
@@ -53,6 +54,46 @@ public class DocumentoController {
         documento.setMimetype(file.getContentType());
 
         repository.save(documento);
+
+        return "redirect:/documentos";
+    }
+
+    @GetMapping("/editar/{id}")
+    public String edit(Model model, @PathVariable String id) {
+        Optional<Documento> doc = repository.findById(Integer.parseInt(id));
+
+        if(doc.isEmpty()) return "redirect:/documentos?erro=Documento+não+encontrada";
+        model.addAttribute("documento", doc);
+
+        return "documentos/edit";
+    }
+
+    @PostMapping("/editar/{id}")
+    public String update(
+            @ModelAttribute("documento") Documento documento,
+            Model model,
+            @RequestParam MultipartFile file,
+            @PathVariable String id
+    ) throws IOException{
+        Optional<Documento> doc = repository.findById(Integer.parseInt(id));
+
+        if(doc.isEmpty()) return "redirect:/documentos?erro=Documento+não+encontrada";
+
+        documento.setArquivo(file.getBytes());
+        documento.setNomeOriginal(file.getOriginalFilename());
+        documento.setMimetype(file.getContentType());
+
+        repository.save(documento);
+
+        model.addAttribute("documento", documento);
+        model.addAttribute("updated", true);
+
+        return "redirect:/documentos";
+    }
+
+    @PostMapping("/excluir/{id}")
+    public String destroy(@PathVariable String id) {
+        repository.deleteById(Integer.parseInt(id));
 
         return "redirect:/documentos";
     }
