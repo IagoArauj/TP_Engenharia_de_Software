@@ -30,6 +30,9 @@
                             <p class="card-text">
                                 Descrição: <span th:text="${doc.descricao}"></span>
                             </p>
+                            <a class="card-text" th:href="'/documentos/download/'+${doc.getId()}">
+                                Baixar
+                            </a>
                         </div>
                     </div>
                 </div>

@@ -56,6 +56,11 @@
 			<artifactId>spring-context</artifactId>
 			<version>5.3.5</version>
 		</dependency>
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.4</version>
+		</dependency>
 	</dependencies>
 
 	<build>

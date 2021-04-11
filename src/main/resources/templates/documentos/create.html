@@ -19,26 +19,25 @@
                 <a href="/documentos" class="btn btn-primary">Voltar</a>
             </div>
 
-            <form action="#" th:action="@{/documentos/novo}" th:object="${documento}" method="post">
+            <form action="#" enctype="multipart/form-data" th:action="@{/documentos/novo}" th:object="${documento}" method="post">
 
                 <div class="form-group">
                     <label for="nome">Nome do documento</label>
-                    <input type="text" th:field="*{nome}" required class="form-control" id="nome">
+                    <input type="text" th:field="*{nome}" required class="form-control" id="nome" name="nome">
                 </div>
                 <div class="form-group">
                     <label for="descricao">Descrição</label>
-                    <input type="text" th:field="*{descricao}" required class="form-control" id="descricao">
+                    <input type="text" th:field="*{descricao}" required class="form-control" id="descricao" name="descricao">
                 </div>
                 <div class="form-group">
                     <label for="data">Data</label>
-                    <input type="date" th:field="*{data}" required class="form-control" id="data">
+                    <input type="date" th:field="*{data}" required class="form-control" id="data" name="data">
                 </div>
-                <!--
                 <div class="form-group">
-                    <label for="arquivo">Envio do arquivo</label>
-                    <input type="file" th:field="*{arquivo}" required class="form-control-file" id="arquivo">
-                </div>-->
-                <button type="submit" class="btn btn-primary">Submit</button>
+                    <label for="file">Envio do arquivo</label>
+                    <input type="file" required class="form-control-file" id="file" name="file">
+                </div>
+                <button type="submit" class="btn btn-primary">Enviar</button>
             </form>
 
         </div>

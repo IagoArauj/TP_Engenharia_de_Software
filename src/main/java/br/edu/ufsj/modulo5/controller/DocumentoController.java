@@ -2,15 +2,18 @@ package br.edu.ufsj.modulo5.controller;
 
 import br.edu.ufsj.modulo5.model.Documento;
 import br.edu.ufsj.modulo5.repository.DocumentoRepository;
-import ch.qos.logback.core.net.SyslogOutputStream;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -40,11 +43,28 @@ public class DocumentoController {
     }
 
     @PostMapping("/novo")
-    public String store(@ModelAttribute("documento") Documento documento, Model model) {
+    public String store(
+            @ModelAttribute("documento") Documento documento,
+            Model model,
+            @RequestParam MultipartFile file
+    ) throws IOException {
+        documento.setArquivo(file.getBytes());
+        documento.setNomeOriginal(file.getOriginalFilename());
+        documento.setMimetype(file.getContentType());
 
         repository.save(documento);
 
         return "redirect:/documentos";
+    }
+
+    @GetMapping("/download/{fileId}")
+    public ResponseEntity<Resource> downloadFile(@PathVariable String fileId) {
+        Documento doc = repository.getOne(Integer.parseInt(fileId));
+
+        return ResponseEntity.ok()
+                .contentType(MediaType.parseMediaType(doc.getMimetype()))
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + doc.getNomeOriginal() + "\"")
+                .body(new ByteArrayResource(doc.getArquivo()));
     }
 
 
