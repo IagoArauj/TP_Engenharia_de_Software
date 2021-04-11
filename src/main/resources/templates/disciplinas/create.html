@@ -12,14 +12,14 @@
 <header>
 
 </header>
-<main>
+<main class="my-5">
     <div class="container">
         <div class="content">
-            <div class="row">
+            <div class="row justify-content-between">
                 <a href="/disciplinas" class="btn btn-primary">Cancelar</a>
             </div>
 
-            <form action="#" enctype="multipart/form-data" th:action="@{/disciplinas/novo}" th:object="${disciplina}" method="post">
+            <form class="mt-5" action="#" enctype="multipart/form-data" th:action="@{/disciplinas/novo}" th:object="${disciplina}" method="post">
                 <div class="form-group">
                     <label for="nome">Nome da disciplina</label>
                     <input type="text" th:field="*{nome}" required class="form-control" id="nome" name="nome">

@@ -12,16 +12,30 @@
 <header>
 
 </header>
-<main>
+<main class="my-5">
     <div class="container">
         <div class="content">
-            <div class="row">
+            <div class="row justify-content-between">
                 <a href="/" class="btn btn-primary">Página Inicial</a>
-            </div>
-            <div class="row justify-content-end">
                 <a href="/disciplinas/novo" class="btn btn-primary">Adicionar disciplina</a>
             </div>
+
             <div class="row justify-content-around my-5">
+                <div th:each="dis : ${disciplinas}" class="card w-100 mb-3">
+                    <div class="card border-primary mb-3 d-flex justify-content-around">
+                        <div class="mb-4 card-header row justify-content-between">
+                            <p>Nome: <span th:text="${dis.nome}"></span></p>
+                            <a href="" class="btn btn-primary">Mais informações</a>
+                        </div>
+                        <div card-body text-primary class="mb-4 d-flex justify-content-around">
+                            <div class="p-2">Código: <span th:text="${dis.codigo}"></span></div>
+                            <div class="p-2">Professor: <span th:text="${dis.professor}"></span></div>
+                            <div class="p-2">Período: <span th:text="${dis.periodo}"></span></div>
+                        </div>
+                    </div>
+                </div>
+
+
                 <div th:each="dis : ${disciplinas}" class="card w-100">
                     <div class="card-body d-flex justify-content-around">
                         <p class="card-text">
