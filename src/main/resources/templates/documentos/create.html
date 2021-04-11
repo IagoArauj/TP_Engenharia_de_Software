@@ -9,7 +9,40 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
 </head>
 <body>
+<header>
 
+</header>
+<main>
+    <div class="container">
+        <div class="content">
+            <div class="row">
+                <a href="/documentos" class="btn btn-primary">Voltar</a>
+            </div>
+
+            <form action="#" th:action="@{/documentos/novo}" th:object="${documento}" method="post">
+
+                <div class="form-group">
+                    <label for="nome">Nome do documento</label>
+                    <input type="text" th:field="*{nome}" required class="form-control" id="nome">
+                </div>
+                <div class="form-group">
+                    <label for="descricao">Descrição</label>
+                    <input type="text" th:field="*{descricao}" required class="form-control" id="descricao">
+                </div>
+                <div class="form-group">
+                    <label for="data">Data</label>
+                    <input type="date" th:field="*{data}" required class="form-control" id="data">
+                </div>
+                <!--
+                <div class="form-group">
+                    <label for="arquivo">Envio do arquivo</label>
+                    <input type="file" th:field="*{arquivo}" required class="form-control-file" id="arquivo">
+                </div>-->
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+
+        </div>
+    </div>
 
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

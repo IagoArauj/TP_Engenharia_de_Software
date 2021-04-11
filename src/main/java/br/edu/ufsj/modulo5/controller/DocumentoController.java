@@ -5,7 +5,9 @@ import br.edu.ufsj.modulo5.repository.DocumentoRepository;
 import ch.qos.logback.core.net.SyslogOutputStream;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -31,15 +33,18 @@ public class DocumentoController {
     }
 
     @GetMapping("/novo")
-    public String create() {
+    public String create(Model model) {
+        model.addAttribute("documento", new Documento());
 
         return "documentos/create";
     }
 
     @PostMapping("/novo")
-    public String store() {
+    public String store(@ModelAttribute("documento") Documento documento, Model model) {
 
-        return "";
+        repository.save(documento);
+
+        return "redirect:/documentos";
     }
 
 
