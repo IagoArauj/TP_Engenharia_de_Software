@@ -48,6 +48,15 @@
                             <span th:if="${!dis.confirmada}">Não confirmada</span>
                         </div>
                     </div>
+                    <div class="card-body d-flex justify-content-between">
+                        <div class="p-2">Sala: <span th:text="${dis.sala}"></span></div>
+                        <div class="p-2">Horário: <span th:text="${dis.horario}"></span></div>
+                        <div class="p-2">Carga Horária: <span th:text="${dis.cargaHoraria}"></span></div>
+                        <div class="p-2"></div>
+                    </div>
+                    <div class="card-body d-flex">
+                        <div class="p-2">Pré Requisitos: <span th:text="${dis.preRequisitos}"></span></div>
+                    </div>
                 </div>
             </div>
 

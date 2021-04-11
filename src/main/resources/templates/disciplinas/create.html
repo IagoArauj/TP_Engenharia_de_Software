@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Documentos</title>
+    <title>Criar disciplina</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
 </head>
 <body>
@@ -15,11 +15,11 @@
 <main class="my-5">
     <div class="container">
         <div class="content">
-            <div class="d-flex mb-3">
+            <div class="row justify-content-between">
                 <a href="/disciplinas" class="btn btn-primary">Cancelar</a>
             </div>
 
-            <form action="#" enctype="multipart/form-data" th:action="@{/disciplinas/novo}" th:object="${disciplina}" method="post">
+            <form class="mt-5" action="#" enctype="multipart/form-data" th:action="@{/disciplinas/novo}" th:object="${disciplina}" method="post">
                 <div class="form-group">
                     <label for="nome">Nome da disciplina</label>
                     <input type="text" th:field="*{nome}" required class="form-control" id="nome" name="nome">
