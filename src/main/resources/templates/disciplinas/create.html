@@ -15,6 +15,45 @@
 <main>
     <div class="container">
         <div class="content">
+            <div class="row">
+                <a href="/disciplinas" class="btn btn-primary">Voltar</a>
+            </div>
+
+            <form action="#" enctype="multipart/form-data" th:action="@{/disciplinas/novo}" th:object="${disciplina}" method="post">
+                <div class="form-group">
+                    <label for="nome">Nome da disciplina</label>
+                    <input type="text" th:field="*{nome}" required class="form-control" id="nome" name="nome">
+                </div>
+                <div class="form-group">
+                    <label for="codigo">Código da disciplina</label>
+                    <input type="text" th:field="*{codigo}" required class="form-control" id="codigo" name="codigo">
+                </div>
+                <div class="form-group">
+                    <label for="professor">Professor</label>
+                    <input type="text" th:field="*{professor}" required class="form-control" id="professor" name="professor">
+                </div>
+                <div class="form-group">
+                    <label for="sala">Sala</label>
+                    <input type="text" th:field="*{sala}" required class="form-control" id="sala" name="sala">
+                </div>
+                <div class="form-group">
+                    <label for="horario">Horário</label>
+                    <input type="time" th:field="*{horario}" required class="form-control" id="horario" name="horario">
+                </div>
+                <div class="form-group">
+                    <label for="cargaHoraria">Carga Horária</label>
+                    <input type="number" th:field="*{cargaHoraria}" required class="form-control" id="cargaHoraria" name="cargaHoraria">
+                </div>
+                <div class="form-group">
+                    <label for="periodo">Período</label>
+                    <input type="number" th:field="*{periodo}" required class="form-control" id="periodo" name="periodo">
+                </div>
+                <div class="form-group">
+                    <label for="preRequisitos">Pré Requisitos</label>
+                    <input type="text" th:field="*{preRequisitos}" required class="form-control" id="preRequisitos" name="preRequisitos">
+                </div>
+                <button type="submit" class="btn btn-primary">Enviar</button>
+            </form>
         </div>
     </div>
 </main>

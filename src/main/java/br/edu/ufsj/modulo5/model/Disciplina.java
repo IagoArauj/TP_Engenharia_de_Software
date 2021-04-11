@@ -3,6 +3,7 @@ package br.edu.ufsj.modulo5.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -27,6 +28,7 @@ public class Disciplina {
 
     private Integer cargaHoraria;
 
+    @DateTimeFormat(pattern = "HH:mm")
     private @Temporal(TemporalType.TIME) Date horario;
 
     private String professor;
