@@ -11,12 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -89,7 +85,7 @@ public class DocumentoController {
         model.addAttribute("documento", documento);
         model.addAttribute("updated", true);
 
-        return "redirect:/documentos";
+        return "/documentos/edit";
     }
 
     @PostMapping("/excluir/{id}")
