@@ -31,6 +31,7 @@
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                     <a class="dropdown-item" th:href="'/documentos/editar/'+${doc.id}">Editar</a>
+                                    <a class="dropdown-item" th:href="'/documentos/download/'+${doc.id}">Baixar documento</a>
                                     <form th:action="'/documentos/excluir/'+${doc.id}" method="post">
                                         <button class="dropdown-item text-danger" type="submit">Excluir</button>
                                     </form>

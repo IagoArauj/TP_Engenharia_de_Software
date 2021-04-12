@@ -58,12 +58,13 @@ public class DocumentoController {
         return "redirect:/documentos";
     }
 
-    @GetMapping("/editar/{id}")
-    public String edit(Model model, @PathVariable String id) {
-        Optional<Documento> doc = repository.findById(Integer.parseInt(id));
+    @GetMapping("/editar/{documentoId}")
+    public String edit(Model model, @PathVariable String documentoId) {
+        Optional<Documento> doc = repository.findById(Integer.parseInt(documentoId));
 
         if(doc.isEmpty()) return "redirect:/documentos?erro=Documento+não+encontrada";
-        model.addAttribute("documento", doc);
+        model.addAttribute("documento", doc.get());
+        model.addAttribute("updated", false);
 
         return "documentos/edit";
     }
